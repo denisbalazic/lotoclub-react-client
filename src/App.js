@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import CombinationsPage from "./pages/CombinationsPage";
+import MycombinationsPage from "./pages/MycombinationsPage";
+import TablePage from "./pages/TablePage";
+import SettingsPage from "./pages/SettingsPage";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    // if (!this.state.isLoaded) {
+    //   return <div>Loading...</div>;
+    // } else {
+    return (
+      <div>
+        <Route exact path="/" render={() => <LandingPage />} />
+        <Route exact path="/register" render={() => <RegisterPage />} />
+        <Route exact path="/login" render={() => <LoginPage />} />
+        <Route exact path="/combinations" render={() => <CombinationsPage />} />
+        <Route exact path="/mycombinations" render={() => <MycombinationsPage />} />
+        <Route exact path="/table" render={() => <TablePage />} />
+        <Route exact path="/settings" render={() => <SettingsPage />} />
+      </div>
+    );
+    // }
+  }
 }
-
-export default App;
