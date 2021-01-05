@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   render() {
-    const { isLogged } = this.props;
+    const { isLogged, toggleNavigation } = this.props;
     return (
       <header>
         <div id="logo">
@@ -23,8 +23,8 @@ export default class Header extends Component {
         ) : (
           <div id="menu">
             <ul>
-              <li>
-                <i id="nav-btn" class="fas fa-bars"></i>
+              <li onClick={toggleNavigation}>
+                <i class="fas fa-bars"></i>
               </li>
             </ul>
           </div>
