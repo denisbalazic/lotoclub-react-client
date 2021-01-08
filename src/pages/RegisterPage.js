@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import authService from "../service/auth";
 
-export default class RegistrationPage extends Component {
+class RegisterPage extends Component {
   state = {
     username: "",
     email: "",
@@ -19,15 +20,15 @@ export default class RegistrationPage extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    //validateInputs
-    //api.post
+    //TODO: validateInputs
     await authService.register({
       username: this.state.username,
       password: this.state.password,
       email: this.state.email,
       passcode: this.state.passcode,
     });
-    //setState,
+    //TODO: setState
+    this.props.history.push("/combinations");
   };
 
   render() {
@@ -106,3 +107,5 @@ export default class RegistrationPage extends Component {
     );
   }
 }
+
+export default withRouter(RegisterPage);
