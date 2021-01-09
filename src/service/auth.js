@@ -9,10 +9,10 @@ const authService = {
       if (res.data.success && res.data.result.token) {
         localStorage.setItem("user", JSON.stringify(res.data.result));
       }
-      console.log(res);
-      return res.data.result.user;
-    } catch (e) {
-      console.log(e);
+      return res.data;
+    } catch (err) {
+      //TODO: Handle no connection and server error
+      return err.response.data;
     }
   },
 };

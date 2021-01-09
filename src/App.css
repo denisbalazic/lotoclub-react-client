@@ -157,16 +157,10 @@ form {
   border-color: var(--imperial-red);
 }
 
-.form-control small {
-  font-size: 0.8rem;
-  visibility: hidden;
-}
-
-.form-control.error small {
-  border-color: var(--imperial-red);
+.form-control .error-msg {
+  height: 1.4rem;
   color: var(--imperial-red);
   font-size: 0.8rem;
-  visibility: visible;
 }
 
 button {
