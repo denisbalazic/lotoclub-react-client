@@ -2,19 +2,49 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3001/api/users";
 
-const authService = {
-  register: async (userData) => {
+class AuthService {
+  setUserAndToken(user) {
+    localStorage.setItem("user", JSON.stringify(user));
+    this.token = user.token;
+  }
+
+  removeUserAndToken() {
+    localStorage.removeItem("user");
+    this.token = null;
+  }
+
+  async register(userData) {
     try {
       const res = await axios.post(API_URL, userData);
       if (res.data.success && res.data.result.token) {
-        localStorage.setItem("user", JSON.stringify(res.data.result));
+        this.setUserAndToken(res.data.result);
       }
       return res.data;
     } catch (err) {
       //TODO: Handle no connection and server error
       return err.response.data;
     }
-  },
-};
+  }
 
-export default authService;
+  async login(userData) {
+    try {
+      const res = await axios.post(API_URL, userData);
+      if (res.data.success && res.data.result.token) {
+        this.setUserAndToken(res.data.result);
+      }
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  }
+
+  logout() {
+    this.removeUserAndToken();
+  }
+
+  isLoggedIn() {
+    return !!this.token;
+  }
+}
+
+export const authService = new AuthService();

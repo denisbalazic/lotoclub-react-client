@@ -4,8 +4,8 @@
  * TODO: Create helper module for validating form inputs
  */
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import authService from "../service/auth";
+import { Redirect } from "react-router-dom";
+import { authService } from "../service/auth";
 
 function checkEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -26,7 +26,8 @@ class RegisterPage extends Component {
       passcode: "",
     },
     errors: {},
-    registrationSuccess: "",
+    registrationSuccess: false,
+    shouldRedirect: false,
   };
 
   validate = () => {
@@ -75,7 +76,7 @@ class RegisterPage extends Component {
       });
       if (res.success) {
         //TODO: handle successful registration with message
-        this.props.history.push("/combinations");
+        this.setState({ shouldRedirect: true });
       } else {
         this.setResponseErrors(res.error.message);
       }
@@ -84,79 +85,83 @@ class RegisterPage extends Component {
 
   render() {
     const { username, email, password, password2, passcode } = this.state.fields;
-    return (
-      <main>
-        <i className="fas fa-dice-d20"></i>
-        <form id="form" action="">
-          <div className="form-control">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              name="username"
-              placeholder="Enter username"
-              value={username}
-              onChange={this.handleChange}
-            />
-            <div className="error-msg">{this.state.errors.username}</div>
-          </div>
-          <div className="form-control">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="text"
-              name="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <div className="error-msg">{this.state.errors.email}</div>
-          </div>
-          <div className="form-control">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <div className="error-msg">{this.state.errors.password}</div>
-          </div>
-          <div className="form-control">
-            <label htmlFor="password2">Confirm password</label>
-            <input
-              id="password2"
-              type="password"
-              name="password2"
-              placeholder="Repeat password"
-              value={password2}
-              onChange={this.handleChange}
-            />
-            <div className="error-msg">{this.state.errors.password2}</div>
-          </div>
-          <div className="form-control">
-            <label htmlFor="passcode">Passcode</label>
-            <input
-              id="passcode"
-              type="text"
-              name="passcode"
-              placeholder="Enter passcode"
-              value={passcode}
-              onChange={this.handleChange}
-            />
-            <div className="error-msg">{this.state.errors.passcode}</div>
-          </div>
-          <button id="submit-btn" onClick={this.handleSubmit}>
-            Submit
-          </button>
-        </form>
-        <i className="fas fa-hand-holding-usd"></i>
-        <i className="fas fa-handshake"></i>
-      </main>
-    );
+    if (this.state.shouldRedirect) {
+      return <Redirect to="/combinations" />;
+    } else {
+      return (
+        <main>
+          <i className="fas fa-dice-d20"></i>
+          <form id="form" action="">
+            <div className="form-control">
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                value={username}
+                onChange={this.handleChange}
+              />
+              <div className="error-msg">{this.state.errors.username}</div>
+            </div>
+            <div className="form-control">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="text"
+                name="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={this.handleChange}
+              />
+              <div className="error-msg">{this.state.errors.email}</div>
+            </div>
+            <div className="form-control">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={this.handleChange}
+              />
+              <div className="error-msg">{this.state.errors.password}</div>
+            </div>
+            <div className="form-control">
+              <label htmlFor="password2">Confirm password</label>
+              <input
+                id="password2"
+                type="password"
+                name="password2"
+                placeholder="Repeat password"
+                value={password2}
+                onChange={this.handleChange}
+              />
+              <div className="error-msg">{this.state.errors.password2}</div>
+            </div>
+            <div className="form-control">
+              <label htmlFor="passcode">Passcode</label>
+              <input
+                id="passcode"
+                type="text"
+                name="passcode"
+                placeholder="Enter passcode"
+                value={passcode}
+                onChange={this.handleChange}
+              />
+              <div className="error-msg">{this.state.errors.passcode}</div>
+            </div>
+            <button id="submit-btn" onClick={this.handleSubmit}>
+              Submit
+            </button>
+          </form>
+          <i className="fas fa-hand-holding-usd"></i>
+          <i className="fas fa-handshake"></i>
+        </main>
+      );
+    }
   }
 }
 
-export default withRouter(RegisterPage);
+export default RegisterPage;
