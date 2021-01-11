@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { authService } from "../service/auth";
 
 export default class Header extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class Header extends Component {
         <div id="logo">
           <Link to="/">Lotoklub#1</Link>
         </div>
-        {!isLogged ? (
+        {!authService.isLoggedIn() ? (
           <div id="menu">
             <ul>
               <Link to="/login">
