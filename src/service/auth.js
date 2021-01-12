@@ -32,7 +32,7 @@ class AuthService {
 
   async login(userData) {
     try {
-      const res = await axios.post(API_URL, userData);
+      const res = await axios.post(API_URL + "/login", userData);
       if (res.data.success && res.data.result.token) {
         this.setUserAndToken(res.data.result);
       }
