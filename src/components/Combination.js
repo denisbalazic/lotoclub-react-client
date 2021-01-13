@@ -6,11 +6,11 @@ export default class Combination extends Component {
     const { combination } = this.props;
     return (
       <div className="combination-display">
-        {combination.mainNums.map((n) => (
-          <Number number={n} />
+        {combination.mainNums.map((n, index) => (
+          <Number key={index} number={n} />
         ))}
-        {combination.euroNums.map((n) => (
-          <Number number={n} />
+        {combination.euroNums.map((n, index) => (
+          <Number key={index} number={n} />
         ))}
       </div>
     );

@@ -4,7 +4,9 @@ const API_URL = "http://localhost:3001/api/users";
 
 class AuthService {
   constructor() {
-    this.token = localStorage.getItem("user");
+    const userStr = localStorage.getItem("user");
+    const user = JSON.parse(userStr);
+    user && (this.token = user.token);
   }
 
   setUserAndToken(user) {

@@ -7,8 +7,8 @@ export default class UserCombinations extends Component {
     return (
       <div className="combination">
         <h3 className="combination-heading">{username}</h3>
-        {combinations.map((comb) => (
-          <Combination combination={comb} />
+        {combinations.map((comb, index) => (
+          <Combination key={index} combination={comb} />
         ))}
       </div>
     );

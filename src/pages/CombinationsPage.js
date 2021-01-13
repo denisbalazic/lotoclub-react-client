@@ -1,29 +1,26 @@
 import React, { Component } from "react";
 import UserCombinations from "../components/UserCombinations";
+import { apiService } from "../service/api";
 
 export default class CombinationsPage extends Component {
   state = {
-    userCombinations: [
-      {
-        username: "Denis",
-        combinations: [
-          {
-            mainNums: [1, 2, 3, 4, 5],
-            euroNums: [1, 2],
-          },
-        ],
-      },
-    ],
+    userCombinations: [],
   };
-  componentDidMount = () => {};
+  componentDidMount = async () => {
+    const data = await apiService.getUserCombinations();
+    this.setState({ userCombinations: data });
+  };
   render() {
     const { userCombinations } = this.state;
     return (
-      <div>
-        {userCombinations.map((u) => (
-          <UserCombinations username={u.username} combinations={u.combinations} />
-        ))}
-      </div>
+      <main>
+        <div className="container">
+          {userCombinations.length > 0 &&
+            userCombinations.map((u, index) => (
+              <UserCombinations key={index} username={u.username} combinations={u.combinations} />
+            ))}
+        </div>
+      </main>
     );
   }
 }
