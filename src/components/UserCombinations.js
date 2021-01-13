@@ -3,10 +3,13 @@ import Combination from "./Combination";
 
 export default class UserCombinations extends Component {
   render() {
+    const { username, combinations } = this.props;
     return (
-      <div>
-        UserCombination
-        <Combination />
+      <div className="combination">
+        <h3 className="combination-heading">{username}</h3>
+        {combinations.map((comb) => (
+          <Combination combination={comb} />
+        ))}
       </div>
     );
   }
