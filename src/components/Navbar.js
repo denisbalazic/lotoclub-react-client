@@ -18,7 +18,7 @@ export default class Navbar extends Component {
     } else {
       return (
         <nav className={visibility ? "" : "hidden"}>
-          <i onClick={toggleNavigation} class="fas fa-times"></i>
+          <i onClick={toggleNavigation} className="fas fa-times"></i>
           <ul>
             <li>
               <NavLink to="/mycombinations">MyCombinations</NavLink>
@@ -42,7 +42,9 @@ export default class Navbar extends Component {
               <NavLink to="/admin">Admin</NavLink>
             </li>
             <li>
-              <a onClick={this.handleLogout}>Logout</a>
+              <a href="#" onClick={this.handleLogout}>
+                Logout
+              </a>
             </li>
           </ul>
         </nav>

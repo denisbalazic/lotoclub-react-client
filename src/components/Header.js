@@ -4,7 +4,7 @@ import { authService } from "../service/auth";
 
 export default class Header extends Component {
   render() {
-    const { isLogged, toggleNavigation } = this.props;
+    const { toggleNavigation } = this.props;
     return (
       <header>
         <div id="logo">
@@ -14,10 +14,10 @@ export default class Header extends Component {
           <div id="menu">
             <ul>
               <Link to="/login">
-                <i class="fas fa-user-ninja"></i>
+                <i className="fas fa-user-ninja"></i>
               </Link>
               <Link to="/register">
-                <i class="fas fa-user-plus"></i>
+                <i className="fas fa-user-plus"></i>
               </Link>
             </ul>
           </div>
@@ -25,7 +25,7 @@ export default class Header extends Component {
           <div id="menu">
             <ul>
               <li onClick={toggleNavigation}>
-                <i class="fas fa-bars"></i>
+                <i className="fas fa-bars"></i>
               </li>
             </ul>
           </div>
